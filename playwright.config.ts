@@ -1,7 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
-  testMatch: ["task3.ts"],
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
