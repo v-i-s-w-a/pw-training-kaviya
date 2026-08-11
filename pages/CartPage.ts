@@ -1,20 +1,23 @@
-import { Locator, Page } from "@playwright/test";
+import { Page } from "@playwright/test";
 
-import { BasePage } from "../pages/BasePage";
+import { BasePage } from "./BasePage";
 
 export class CartPage extends BasePage {
   constructor(page: Page) {
     super(page, "/cart.html");
   }
 
-  itemNames(): Locator {
-    return this.page.getByTestId("inventory-item-name");
+  // Get product names in the cart
+  async itemNames(): Promise<string[]> {
+    return this.page.getByTestId("inventory-item-name").allTextContents();
   }
 
-  removeItems(productName: string): Locator {
-    return this.page
+  // Remove one product by name
+  async removeItem(productName: string): Promise<void> {
+    await this.page
       .locator(".cart_item")
       .filter({ hasText: productName })
-      .getByRole("button", { name: /remove/i });
+      .getByRole("button", { name: /remove/i })
+      .click();
   }
 }
