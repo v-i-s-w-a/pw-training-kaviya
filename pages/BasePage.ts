@@ -1,12 +1,12 @@
-import type { Page } from "@playwright/test";
+import { Page } from "@playwright/test";
 
 export class BasePage {
   constructor(
     protected readonly page: Page,
-    private readonly path: string,
+    private path: string
   ) {}
 
-  async goto(): Promise<void> {
+  async open() {
     await this.page.goto(`https://www.saucedemo.com${this.path}`);
   }
 }
