@@ -1,5 +1,8 @@
 import { test, expect } from "@playwright/test";
 
+// These tests need a logged-out browser (login page / locked_out_user)
+test.use({ storageState: { cookies: [], origins: [] } });
+
 test("saucedemo has title Swag Labs and correct URL", async ({ page }) => {
   await page.goto("https://www.saucedemo.com/");
 
