@@ -9,13 +9,9 @@ type Fixtures = {
 };
 
 export const test = base.extend<Fixtures>({
-  // Log in and hand back the inventory page
+  // Session comes from .auth/user.json (setup project)
   inventoryPage: async ({ page }, use) => {
-    await page.goto("https://www.saucedemo.com");
-    await page.getByPlaceholder("Username").fill("standard_user");
-    await page.getByPlaceholder("Password").fill("secret_sauce");
-    await page.getByRole("button", { name: "Login" }).click();
-
+    await page.goto("https://www.saucedemo.com/inventory.html");
     await use(new InventoryPage(page));
   },
 
